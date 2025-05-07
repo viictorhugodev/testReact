@@ -1,17 +1,13 @@
 import React, { useState } from "react";
-import { ScannerProvider, useScanner } from "../ScannerContext.js";
 
 function ScannerComponent() {
   const [scanValue, setScanValue] = useState("");
   const [isLoading, setIsLoading] = useState(false);
-  const { handleScan } = useScanner();
 
   const onScan = async () => {
     if (scanValue.trim()) {
       setIsLoading(true);
       await new Promise((resolve) => setTimeout(resolve, 1500));
-      handleScan(scanValue);
-      setScanValue("");
       setIsLoading(false);
     }
   };
@@ -61,7 +57,6 @@ function ScannerComponent() {
 function TableComponent() {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTracking, setSelectedTracking] = useState(null);
-  const { tableData, newItems } = useScanner();
 
   const handleTrackingClick = (tracking) => {
     setSelectedTracking(tracking);
@@ -81,7 +76,7 @@ function TableComponent() {
         <div className="flex items-center gap-2">
           <span className="text-sm text-gray-500">Total items:</span>
           <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-red-100 text-red-800">
-            {tableData.length}
+            0
           </span>
         </div>
       </div>
@@ -110,38 +105,28 @@ function TableComponent() {
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            {tableData.map((item) => (
-              <tr
-                key={item.id}
-                className={`hover:bg-gray-50 transition-colors duration-300 ${
-                  newItems.has(item.id) ? "animate-highlight" : ""
-                }`}
-              >
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {item.id}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap">
-                  <div
-                    onClick={() => handleTrackingClick(item)}
-                    className="inline-block cursor-pointer bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors"
-                  >
-                    {item.trackingNumber}
-                  </div>
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {item.package}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {item.deliveryDate}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {item.client}
-                </td>
-                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                  {item.facility}
-                </td>
-              </tr>
-            ))}
+            <tr className="hover:bg-gray-50 transition-colors duration-300">
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                No data available
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap">
+                <div className="inline-block cursor-pointer bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors">
+                  No data available
+                </div>
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                No data available
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                No data available
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                No data available
+              </td>
+              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                No data available
+              </td>
+            </tr>
           </tbody>
         </table>
       </div>
@@ -156,13 +141,10 @@ function TableComponent() {
 }
 
 function ModalDetailsComponent({ isOpen, onClose, trackingDetails }) {
-  const { deleteTracking } = useScanner();
-
   if (!isOpen) return null;
 
   const handleDelete = () => {
     if (trackingDetails?.id) {
-      deleteTracking(trackingDetails.id);
       onClose();
     }
   };
@@ -248,14 +230,12 @@ function ModalDetailsComponent({ isOpen, onClose, trackingDetails }) {
 
 function App() {
   return (
-    <ScannerProvider>
-      <div className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <ScannerComponent />
-          <TableComponent />
-        </div>
+    <div className="min-h-screen bg-gray-100 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        <ScannerComponent />
+        <TableComponent />
       </div>
-    </ScannerProvider>
+    </div>
   );
 }
 
