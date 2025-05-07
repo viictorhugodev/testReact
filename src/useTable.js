@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useScanner } from '../context/ScannerContext';
+import { useScanner } from './ScannerContext';
 
 export const useTable = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

@@ -1,6 +1,6 @@
 import React from 'react';
-import { useTable } from '../hooks/useTable';
 import ModalDetailsComponent from './ModalDetailsComponent';
+import { useTable } from './useTable';
 
 const TableComponent = () => {
   const {

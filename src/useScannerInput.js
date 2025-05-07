@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useScanner } from '../context/ScannerContext';
+import { useScanner } from './ScannerContext';
 
 export const useScannerInput = () => {
   const [scanValue, setScanValue] = useState('');

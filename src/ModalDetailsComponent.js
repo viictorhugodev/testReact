@@ -1,5 +1,5 @@
 import React from 'react';
-import { useScanner } from '../context/ScannerContext';
+import { useScanner } from './ScannerContext';
 
 const ModalDetailsComponent = ({ isOpen, onClose, trackingDetails }) => {
   const { deleteTracking } = useScanner();

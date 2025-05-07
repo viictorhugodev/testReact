@@ -1,7 +1,7 @@
 import React from 'react';
-import ScannerComponent from '../components/ScannerComponent';
-import TableComponent from '../components/TableComponent';
-import { ScannerProvider } from '../context/ScannerContext';
+import ScannerComponent from '../ScannerComponent';
+import { ScannerProvider } from '../ScannerContext';
+import TableComponent from '../TableComponent';
 
 function App() {
   return (

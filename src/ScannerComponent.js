@@ -1,5 +1,5 @@
 import React from 'react';
-import { useScannerInput } from '../hooks/useScannerInput';
+import { useScannerInput } from './useScannerInput';
 
 const ScannerComponent = () => {
   const {

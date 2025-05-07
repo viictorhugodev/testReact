@@ -1,5 +1,5 @@
 import React, { createContext, useCallback, useContext, useState } from 'react';
-import { dummyData } from '../mock/dummyData';
+import { dummyData } from './dummyData';
 
 const ScannerContext = createContext();
 
