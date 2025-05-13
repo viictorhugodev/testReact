@@ -1,9 +1,9 @@
-import { useState } from "react";
 import { useScanner } from "../hooks/useScanner";
 
  export function ScannerComponent() {
 
-  const { handleInputChange, handleKeyPress, isLoading, onScan, scanValue, setScanValue } = useScanner()
+
+  const { handleInputChange, handleKeyPress, isLoading, onScan, scanValue } = useScanner()
 
   return (
     <div className="bg-white shadow-md rounded-lg p-6 mb-6">

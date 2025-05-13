@@ -3,11 +3,14 @@ import ReactDOM from 'react-dom/client';
 import './styles/index.css';
 import reportWebVitals from './utils/reportWebVitals';
 import App from './views/App';
+import { ScannerProvider } from './ScannerContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <App />
+    <ScannerProvider>
+      <App />
+    </ScannerProvider>
   </React.StrictMode>
 );
 

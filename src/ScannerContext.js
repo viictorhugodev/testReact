@@ -145,7 +145,7 @@ const ScannerProvider = ({ children }) => {
   );
 };
 
-const useScanner = () => {
+export const useScanner = () => {
   const context = useContext(ScannerContext);
   if (!context) {
     throw new Error("useScanner must be used within a ScannerProvider");
@@ -153,4 +153,4 @@ const useScanner = () => {
   return context;
 };
 
-export { ScannerProvider, useScanner };
+export { ScannerProvider, useScanner as useScannerContext };

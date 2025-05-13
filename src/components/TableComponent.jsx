@@ -1,10 +1,14 @@
-import { useState } from "react";
 import { ModalDetailsComponent } from "./ModalDetailsComponent";
 import { useTable } from "../hooks/useTable";
+import { useScannerContext } from "../ScannerContext";
 
- export function TableComponent() {
 
-  const { handleCloseModal, handleTrackingClick, isModalOpen, selectedTracking, setIsModalOpen, setSelectedTracking } = useTable()
+export function TableComponent() {
+
+  const { handleCloseModal, isModalOpen, selectedTracking } = useTable()
+  const { tableData, newItems } = useScannerContext(); 
+  console.log("🧪 tableData desde contexto:", tableData);
+
 
   return (
     <div className="bg-white shadow-md rounded-lg overflow-hidden">
@@ -44,28 +48,31 @@ import { useTable } from "../hooks/useTable";
             </tr>
           </thead>
           <tbody className="bg-white divide-y divide-gray-200">
-            <tr className="hover:bg-gray-50 transition-colors duration-300">
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                No data available
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap">
-                <div className="inline-block cursor-pointer bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors">
+            {tableData.length === 0 ? (
+              <tr>
+                <td colSpan="6" className="text-center py-6 text-gray-500">
                   No data available
-                </div>
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                No data available
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                No data available
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                No data available
-              </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                No data available
-              </td>
-            </tr>
+                </td>
+              </tr>
+            ) : (
+              tableData.map((item) => (
+                <tr
+                  key={item.id}
+                  className={`hover:bg-gray-50 transition-colors duration-300 ${
+                    newItems.has(item.id) ? "bg-green-100" : ""
+                  }`}
+                >
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{item.id}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-blue-700 font-medium cursor-pointer">
+                    {item.trackingNumber}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.package}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.deliveryDate}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.client}</td>
+                  <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{item.facility}</td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>
