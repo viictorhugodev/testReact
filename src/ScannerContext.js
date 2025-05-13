@@ -1,4 +1,4 @@
-import React, { createContext, useCallback, useContext, useState } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
 
 const dummyData = [
   {
@@ -83,7 +83,7 @@ const dummyData = [
   },
 ];
 
-const ScannerContext = createContext();
+ export const ScannerContext = createContext();
 
 const ScannerProvider = ({ children }) => {
   const [tableData, setTableData] = useState(dummyData);
